@@ -2,22 +2,26 @@ import mongoose from "mongoose";
 
 //producer schema
 const producerSchema = new mongoose.Schema({
-    name: {
+    producerName: {
         type: String,
         trim: true
     },
-    gender: {
+    producerGender: {
         type: String,
         trim: true
     },
-    dob: {
+    producerDob: {
         type: Date,
         trim: true
     },
-    bio: {
+    producerBio: {
         type: String,
         trim: true
-    }
+    },
+    movies: [{
+        type: String,
+        trim: true
+    }]
 });
 
 const Producer = mongoose.model('Producer', producerSchema);

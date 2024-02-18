@@ -5,15 +5,13 @@ const router = express.Router();
 
 //Api to add new Actor
 router.post('/add', async (req, res) => {
-
-    const { name, gender, dob, bio } = req.body;
-
+    const { actorName, actorGender, actorDob, actorBio } = req.body;
     try {
         const newActor = await new Actor({
-            name,
-            gender,
-            dob,
-            bio
+            actorName,
+            actorGender,
+            actorDob,
+            actorBio
         }).save();
         if (!newActor) {
             return res.status(400).send({ error: "Error occured while saving the actor" })

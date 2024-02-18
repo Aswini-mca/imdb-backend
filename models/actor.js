@@ -2,22 +2,26 @@ import mongoose from "mongoose";
 
 //actor schema
 const actorSchema = new mongoose.Schema({
-    name: {
+    actorName: {
         type: String,
         trim: true
     },
-    gender: {
+    actorGender: {
         type: String,
         trim: true
     },
-    dob: {
+    actorDob: {
         type: Date,
         trim: true
     },
-    bio: {
+    actorBio: {
         type: String,
         trim: true
-    }
+    },
+    movies: [{
+        type: String,
+        trim: true
+    }]
 });
 
 const Actor = mongoose.model('Actor', actorSchema);

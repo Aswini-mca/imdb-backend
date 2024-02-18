@@ -42,7 +42,7 @@ router.post('/signup', async (req, res) => {
         }
         //check Password and confirmPassword are same
         if (password !== confirmPassword) {
-            return res.status(404).json({ error: 'Password and Re-Enter password are not same' });
+            return res.status(400).json({ error: 'Password and Re-Enter password are not same' });
         }
         const hashedPassword = await genPassword(password)
         user = new User({

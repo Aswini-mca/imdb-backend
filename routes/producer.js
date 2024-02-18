@@ -5,14 +5,13 @@ const router = express.Router();
 
 //Api to add new Producer
 router.post('/add', async (req, res) => {
-    const { name, gender, dob, bio } = req.body;
-
+    const { producerName, producerGender, producerDob, producerBio } = req.body;
     try {
         const newProducer = await new Producer({
-            name,
-            gender,
-            dob,
-            bio
+            producerName,
+            producerGender,
+            producerDob,
+            producerBio
         }).save();
         if (!newProducer) {
             return res.status(400).send({ error: "Error occured while saving the producer" })

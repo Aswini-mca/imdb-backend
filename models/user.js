@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 //user schema
 const userSchema = new mongoose.Schema({
-    name: {
+    userName: {
         type: String,
         unique: true,
         trim: true
@@ -19,13 +19,13 @@ const userSchema = new mongoose.Schema({
         type: String,
         trim: true
     },
-    resetToken:{
-        type:String
+    resetToken: {
+        type: String
     },
-    resetTokenExpiresAt:{
-        type:Date
+    resetTokenExpiresAt: {
+        type: Date
     }
 });
 
-const User = mongoose.model("User",userSchema);
-export {User};
+const User = mongoose.model("User", userSchema);
+export { User };
