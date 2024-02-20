@@ -9,14 +9,14 @@ const router = express.Router();
 
 //sign up API
 router.post('/signup', async (req, res) => {
-    const { name, email, password, confirmPassword } = req.body;
+    const { userName, email, password, confirmPassword } = req.body;
     let user = await getUserByName(req)
     try {
         //validate username & required fields
         if (user) {
             return res.status(400).send({ error: "Username already exists" })
         }
-        if (!name) {
+        if (!userName) {
             return res.status(400).send({ error: "Username field is required" })
         }
         if (!email) {
@@ -46,7 +46,7 @@ router.post('/signup', async (req, res) => {
         }
         const hashedPassword = await genPassword(password)
         user = new User({
-            name,
+            userName,
             email,
             password: hashedPassword,
             confirmPassword: hashedPassword
@@ -60,20 +60,21 @@ router.post('/signup', async (req, res) => {
 
 //login API
 router.post('/login', async (req, res) => {
-    const { name, password } = req.body;
+    const { userName, password } = req.body;
     const userFromDB = await getUserByName(req)
     try {
         //validate required Fields
-        if (!name) {
+        if (!userName) {
             return res.status(400).send({ error: "Username is required" })
+        }
+        if (!password) {
+            return res.status(400).send({ error: "Password is required" })
         }
         //validate username
         if (!userFromDB) {
             return res.status(400).send({ error: "Invalid Credentials" })
         }
-        if (!password) {
-            return res.status(400).send({ error: "Password is required" })
-        }
+        
 
         const storedDbPassword = userFromDB.password
         const isPasswordMatch = await bcrypt.compare(password, storedDbPassword)

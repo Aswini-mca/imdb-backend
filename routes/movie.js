@@ -1,7 +1,7 @@
 import express, { Router } from 'express';
 import { Producer } from '../models/producer.js';
 import { Actor } from '../models/actor.js';
-import { Movie} from '../models/movie.js';
+import { Movie } from '../models/movie.js';
 
 const router = express.Router();
 
@@ -137,3 +137,18 @@ router.delete('/delete/:id', async (req, res) => {
     }
 })
 export const moviesRouter = router;
+
+//Api to get a movie by name
+router.get('/movie-by-name/:movieName', async (req, res) => {
+    const { movieName } = req.params
+    try {
+        const movie = await Movie.findOne({ movieName }).populate('actors producer', 'actorName producerName')
+        if (!movie) {
+            return res.status(400).send({ error: "Movie is not availble in DB" });
+        }
+        return res.status(200).json({ movie: movie });
+    } catch (error) {
+        return res.status(500).json({ message: 'Internal Server Error', error: error.message });
+
+    }
+})

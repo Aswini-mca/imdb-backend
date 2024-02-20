@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 import randomstring from "randomstring"
 
 async function getUserByName(req) {
-    return await User.findOne({ name: req.body.name });
+    return await User.findOne({ userName: req.body.userName });
 }
 
 async function genPassword(password) {
