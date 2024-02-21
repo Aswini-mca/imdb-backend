@@ -116,7 +116,7 @@ router.put('/edit/:id', async (req, res) => {
             },
             { new: true }
         )
-        return res.status(201).send({ movie, message: "Updated movie details successfully" })
+        return res.status(201).send({ movie:movie, message: "Updated movie details successfully" })
     } catch (error) {
         return res.status(500).json({ message: 'Internal Server Error', error: error.message });
     }

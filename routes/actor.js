@@ -23,4 +23,20 @@ router.post('/add', async (req, res) => {
 
 });
 
+//API to get actors
+router.get('/all',async(req,res)=>{
+    try {
+        const actors = await Actor.find()
+        if (actors) {
+            return res.status(202).json({ actors })
+        }
+        else {
+            return res.status(400).send({ error: "Error occured while getting the actors list" })
+        }
+    } catch (error) {
+        return res.status(500).json({ message: 'Internal Server Error', error: error.message });
+
+    }
+})
+
 export const actorsRouter = router;

@@ -23,5 +23,20 @@ router.post('/add', async (req, res) => {
 
 });
 
+//API to get producer
+router.get('/all',async(req,res)=>{
+    try {
+        const producer = await Producer.find()
+        if (producer) {
+            return res.status(202).json({ producer })
+        }
+        else {
+            return res.status(400).send({ error: "Error occured while getting the Producers list" })
+        }
+    } catch (error) {
+        return res.status(500).json({ message: 'Internal Server Error', error: error.message });
+
+    }
+})
 
 export const producersRouter = router;
