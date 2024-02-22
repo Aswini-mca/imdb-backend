@@ -19,9 +19,9 @@ app.use(cors());
 //mongoDB connection
 export async function dataBaseConnection() {
     let MONGO_URL = process.env.MONGO_URL
-    let DB_NAME = process.env.DB_NAME
+    let DB_NAME = process.env.DB_Name
     try {
-        await mongoose.connect(MONGO_URL,{dbName:DB_NAME})
+        await mongoose.connect(MONGO_URL,{ dbName:DB_NAME})
         console.log("Mongodb is connected")
     } catch (error) {
         console.log("Mongodb connection error")
